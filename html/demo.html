@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic</title>
+</head>
+<style>
+  #orange{
+      background-color: rgb(255, 72, 0);
+      height: 40px;
+      width:55px;
+      text-align: center;
+      color:white;
+      border-radius:8px;
+      border-color: black;
+  }
+  #blue{
+      background-color: blue;
+      height: 40px;
+      width: 55px;
+      border-radius:8px;
+      border-color: black;
+      text-align: center;
+      color:white;
+      }
+      #black{
+          background-color: black;
+          border-radius:8px;
+          border-radius:8px;
+      border-color: black;
+      height: 40px;
+      width: 55px;
+      text-align: center;
+      }
+  #green{
+      background-color: rgb(12, 245, 12);
+      height: 31px;
+      text-align: center;
+      border-radius:8px;
+      border-color: black;
+  }
+  #white{
+      background-color:white;
+      height: 40px;
+      width: 55px;
+      text-align: center;
+      border-radius:8px;
+      border-color: black;
+  }
+  #lgreen{
+  background-color: rgb(6, 252, 6);
+  height: 32px;
+  width:22px;
+  border-radius:8px;
+      border-color: black;
+      }
+
+      #form{
+      background-color: yellow;
+      color: black;
+    }
+  
+  
+  </style>
+  
+<body>
+    <h1>kamaraj</h1>
+    <a href="https://kamarajengg.edu.in/">click</a>
+    <img src="wp5621661-kakashi-sensei-desktop-wallpapers.jpg" style="width: 200px;height: 200px;" >
+     <br />
+     <hr>
+    <table border="1">
+         
+        <tr>
+          <th>Company</th>
+          <th>Contact</th>
+          <th>Country</th>
+        </tr>
+        <tr>
+          <td>Alfreds Futterkiste</td>
+          <td>Maria Anders</td>
+          <td>Germany</td>
+        </tr>
+        <tr>
+          <td>Centro comercial Moctezuma</td>
+          <td>Francisco Chang</td>
+          <td>Mexico</td>
+        </tr>
+        
+      </table>
+      <hr>
+          <table border="15px" style="background-color: black;">
+              <tr>
+                  <td id="lgreen" colspan="4"></td>
+              </tr>
+              <tr>
+                  <td id="orange">C</td>
+                  <td id="blue">/</td>
+                  <td id="blue">*</td>
+                  <td id="blue">-</td>
+              </tr>
+              <tr>
+                  <TD id="white">7</TD>
+                  <TD id="white">8</TD>
+                  <TD id="white">9</TD>
+                  <td id="blue">+</td>
+              </tr>
+              <tr>
+              <td id="white">4</td>
+              <td id="white">5</td>
+              <td id="white">6</td>
+              <td id="green" rowspan="3">=</td>
+              </tr>
+              <tr>
+                  <td id="white">1</td>
+                  <td id="white">2</td>
+                  <td id="white">3</td>
+              </tr>
+              <tr>
+                  <td id="white">0</td>
+                  <td id="white">.</td>
+                  <td id="black">.</td>
+              </tr>
+              
+                  </table>
+      
+      </center>
+
+<h2>HTML Forms</h2>
+
+<form action="/action_page.php">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="fname" value="John"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lname" value="Doe"><br><br>
+  <label for=""
+  <input type="submit" value="Submit">
+</form> 
+
+<p>If you click the "Submit" button, the form-data will be sent to a page called "/action_page.php".</p>
+<hr>
+<center>
+
+
+<form  onmouseup="call()" id="form">
+  <p>FORM</p>
+
+  <table border="2">
+    <tr>
+      <td>
+        Name:
+      </td>
+      <td><input type="text"></td>
+    </tr>
+    <tr>
+      <td>Email:</td>
+      <td><input type="email"></td>
+    </tr>
+    <tr>
+      <td>mobileno:</td>
+      <td><input type="tel"></td>
+    </tr>
+    <tr>
+      <td>Age:</td>
+      <td><input type="number"></td>
+    </tr>
+    <tr>
+      <td>gender:</td>
+      <td><input type="radio" id="male" name="gender" value="male"><label for="male">male</label><input type="radio" id="female" name="gender" value="female"><label for="female">female</label></td>
+    
+    </tr>
+    <tr>
+      <td>Id proof</td>
+      <td><input type="file"></td>
+    </tr>
+    
+  </table>
+  <button><input type="submit"></button>
+</form>
+
+
+
+
+<input id="out" type="text">
+<button onclick="call()">Submit</button>
+
+
+</center>
+
+</body>
+<script>
+  function call(){
+    var name=document.getElementById("out").value
+    window.alert("welcome "+name)
+    
+  }
+  function well(){
+    document.getElementById("two").style.backgroundColor="yellow"
+  }
+</script>
+</html> 
