@@ -1,0 +1,186 @@
+nlu:
+- intent: ask_admission_date
+  examples: |
+    - What is the last date for admissions?
+    - When will admission close?
+    - Admission deadline?
+    - Until when can I apply for admission?
+    - Is admission still open?
+    - When do admissions end?
+    - Can I still apply for this year?
+    - What is the admission closing date?
+
+- intent: ask_college_timings
+  examples: |
+    - What are the college timings?
+    - When does college start?
+    - What time does college open?
+    - When do classes begin?
+    - What is the daily schedule?
+    - What are the working hours of the college?
+    - When does the college day end?
+    - What time do classes finish?
+
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey there
+    - good morning
+    - good afternoon
+    - good evening
+    - hey
+    - hi there
+
+- intent: goodbye
+  examples: |
+    - bye
+    - see you later
+    - goodbye
+    - talk to you soon
+    - see ya
+    - catch you later
+    - have a nice day
+
+- intent: request_certificate
+  examples: |
+    - I need a [bonafide](cert_type) certificate
+    - Can you give me a [leave](cert_type) certificate?
+    - How do I get a [outpass](cert_type) certificate?
+    - Please issue my [hostel](cert_type) certificate
+    - I want to apply for a [bonafide](cert_type) certificate
+    - [Bonafide](cert_type) certificate request
+    - I need a certificate
+    - Can I get a certificate?
+    - I want to apply for a document
+    - [Leave](cert_type) form request
+    - [Outpass](cert_type) request
+
+- intent: request_admission_certificate
+  examples: |
+    - I need an admission certificate
+    - Can you provide me with an admission certificate?
+    - How do I get my admission certificate?
+    - Please issue my admission certificate
+    - Admission certificate request
+
+- intent: request_college_id
+  examples: |
+    - I need a college ID          
+    - Can you issue me a college ID?
+    - How do I get my college ID?
+    - Please provide my college ID
+    - College ID request
+
+- intent: request_hostel_id
+  examples: |
+    - I need a hostel ID
+    - Can you issue me a hostel ID?
+    - How do I get my hostel ID?
+    - Please provide my hostel ID
+    - Hostel ID request
+
+- intent: request_hostel_rules
+  examples: |
+    - What are the hostel rules?
+    - Can you tell me the hostel rules?
+    - Where can I find hostel rules?
+    - Hostel rules and regulations
+    - What are the dos and don'ts in hostel?
+
+- intent: ask_syllabus
+  examples: |
+    - Can I get the syllabus for my course?
+    - What is the syllabus for BSc Computer Science?
+    - Show me the syllabus for first year
+    - Where can I find the syllabus?
+    - Syllabus details for my department
+
+- intent: ask_departments
+  examples: |
+    - What departments are available in the college?
+    - List all departments
+    - Which courses are offered?
+    - Departments in this college
+    - What are the available streams?
+
+- intent: ask_circulars
+  examples: |
+    - Are there any new circulars?
+    - Show me the latest circulars
+    - Any important announcements?
+    - College circulars
+    - Where can I find recent circulars?
+
+- intent: ask_staff_details
+  examples: |
+    - Who is the head of the Computer Science department?
+    - Give me details of the teaching staff
+    - List all faculty members
+    - Staff details for my department
+    - Who teaches Mathematics?
+
+- intent: ask_fee_structure
+  examples: |
+    - What is the fee structure for BSc?
+    - How much is the tuition fee?
+    - Show me the fee details
+    - What are the hostel fees?
+    - Fee structure for first year
+
+- intent: request_marksheet
+  examples: |
+    - I need my marksheet
+    - How do I get my marksheet?
+    - Please provide my marksheet
+    - Marksheet request
+    - Can you send me my marksheet?
+
+- intent: request_leave_form
+  examples: |
+    - I want to apply for leave
+    - How do I get a leave form?
+    - Please provide a leave application form
+    - Leave form request
+    - Can I get a leave form?
+
+- intent: bot_challenge
+  examples: |
+    - Are you a bot?
+    - Who made you?
+    - What are you?
+    - Are you human?
+
+- intent: apply_outpass
+  examples: |
+    - I want to apply for an outpass
+    - Can I get an outpass?
+    - I need to go home, give me an outpass
+    - Apply for outpass
+    - I need an outpass for tomorrow
+    - Can you help me apply for an outpass?
+    - Outpass request
+    - I want to go out, how can I get an outpass?
+
+- intent: apply_bonafide
+  examples: |
+    - I want to apply for a bonafide
+    - Can I get a bonafide certificate?
+    - I need a bonafide for my passport
+    - Apply for bonafide
+    - I need a bonafide certificate for bank account
+    - Can you help me apply for a bonafide?
+    - Bonafide request
+    - I want a bonafide certificate
+
+- intent: check_outpass_status
+  examples: |
+    - What is my outpass status?
+    - Check my outpass status
+    - Has my outpass been approved?
+    - Can I get my outpass?
+    - Show my outpass status
+    - Is my leave request approved?
+    - check status
+    - status of my outpass
+

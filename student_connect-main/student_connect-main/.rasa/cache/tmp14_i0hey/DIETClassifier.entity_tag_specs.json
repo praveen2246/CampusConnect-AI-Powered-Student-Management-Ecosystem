@@ -1,0 +1,20 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-cert_type",
+      "2": "I-cert_type",
+      "3": "L-cert_type",
+      "4": "U-cert_type",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-cert_type": 1,
+      "I-cert_type": 2,
+      "L-cert_type": 3,
+      "U-cert_type": 4,
+      "O": 0
+    },
+    "num_tags": 5
+  }
+]

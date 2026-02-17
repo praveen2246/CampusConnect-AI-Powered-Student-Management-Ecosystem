@@ -1,0 +1,22 @@
+{
+  "0": "apply_bonafide",
+  "1": "apply_outpass",
+  "2": "ask_admission_date",
+  "3": "ask_circulars",
+  "4": "ask_college_timings",
+  "5": "ask_departments",
+  "6": "ask_fee_structure",
+  "7": "ask_staff_details",
+  "8": "ask_syllabus",
+  "9": "bot_challenge",
+  "10": "check_outpass_status",
+  "11": "goodbye",
+  "12": "greet",
+  "13": "request_admission_certificate",
+  "14": "request_certificate",
+  "15": "request_college_id",
+  "16": "request_hostel_id",
+  "17": "request_hostel_rules",
+  "18": "request_leave_form",
+  "19": "request_marksheet"
+}

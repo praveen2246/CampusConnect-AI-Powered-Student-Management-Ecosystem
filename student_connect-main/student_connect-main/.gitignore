@@ -1,0 +1,54 @@
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+*.pdf
+*.zip
+
+# Node.js (Admin Dashboard)
+node_modules/
+admin_dashboard/node_modules/
+admin_dashboard/dist/
+admin_dashboard/build/
+.env
+admin_dashboard/.env
+
+# Python & Rasa (Backend)
+__pycache__/
+*.py[cod]
+*$py.class
+back/venv/
+back/venv_rasa/
+back/rasa/models/
+back/rasa/.rasa/
+back/rasa/results/
+back/rasa/graph.html
+back/rasa/logs/
+back/.env
+v/
+
+# Flutter (Student App)
+student_connect_fixed/.dart_tool/
+student_connect_fixed/.packages
+student_connect_fixed/.pub-cache/
+student_connect_fixed/.pub/
+student_connect_fixed/build/
+student_connect_fixed/ios/Pods/
+student_connect_fixed/ios/.symlinks/
+student_connect_fixed/ios/Flutter/Generated.xcconfig
+student_connect_fixed/ios/Flutter/flutter_export_environment.sh
+student_connect_fixed/android/app/src/main/res/values/strings.xml
+student_connect_fixed/android/local.properties
+student_connect_fixed/android/key.properties
+student_connect_fixed/android/app/build.gradle
+student_connect_fixed/windows/flutter/ephemeral/
+student_connect_fixed/linux/flutter/ephemeral/
+student_connect_fixed/macos/Flutter/ephemeral/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+*.iws
+*.ipr

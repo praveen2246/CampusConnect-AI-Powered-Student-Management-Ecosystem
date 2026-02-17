@@ -1,0 +1,127 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- rule: Greet user anytime the user greets
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: Provide admission date
+  steps:
+    - intent: ask_admission_date
+    - action: utter_admission_date
+
+- rule: Provide college timings
+  steps:
+    - intent: ask_college_timings
+    - action: utter_college_timings
+
+- rule: Dynamic Certificate Process
+  steps:
+    - intent: request_certificate
+    - action: action_start_certificate_request
+
+- rule: Request admission certificate
+  steps:
+    - intent: request_admission_certificate
+    - action: utter_request_admission_certificate
+
+- rule: Request college ID
+  steps:
+    - intent: request_college_id
+    - action: utter_request_college_id
+
+- rule: Request hostel ID
+  steps:
+    - intent: request_hostel_id
+    - action: utter_request_hostel_id
+
+- rule: Ask hostel rules
+  steps:
+    - intent: request_hostel_rules
+    - action: utter_request_hostel_rules
+
+- rule: Ask syllabus
+  steps:
+    - intent: ask_syllabus
+    - action: utter_ask_syllabus
+
+- rule: Ask departments
+  steps:
+    - intent: ask_departments
+    - action: utter_ask_departments
+
+- rule: Ask circulars
+  steps:
+    - intent: ask_circulars
+    - action: utter_ask_circulars
+
+- rule: Ask staff details
+  steps:
+    - intent: ask_staff_details
+    - action: utter_ask_staff_details
+
+- rule: Ask fee structure
+  steps:
+    - intent: ask_fee_structure
+    - action: utter_ask_fee_structure
+
+- rule: Request marksheet
+  steps:
+    - intent: request_marksheet
+    - action: utter_request_marksheet
+
+- rule: Request leave form
+  steps:
+    - intent: request_leave_form
+    - action: utter_request_leave_form
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+- rule: Activate outpass form
+  steps:
+    - intent: apply_outpass
+    - action: outpass_form
+    - active_loop: outpass_form
+
+- rule: Submit outpass form
+  condition:
+    - active_loop: outpass_form
+  steps:
+    - action: outpass_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_submit_outpass
+    - action: utter_outpass_submitted
+
+- rule: Activate bonafide form
+  steps:
+    - intent: apply_bonafide
+    - action: bonafide_form
+    - active_loop: bonafide_form
+
+- rule: Submit bonafide form
+  condition:
+    - active_loop: bonafide_form
+  steps:
+    - action: bonafide_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_submit_bonafide
+    - action: utter_bonafide_submitted
+
+- rule: Check outpass status
+  steps:
+    - intent: check_outpass_status
+    - action: action_check_outpass_status

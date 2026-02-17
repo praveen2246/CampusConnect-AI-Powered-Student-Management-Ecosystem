@@ -1,0 +1,18 @@
+- story: Greet user
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- story: apply for outpass
+  steps:
+    - intent: apply_outpass
+    - action: outpass_form
+    - active_loop: outpass_form
+    - action: action_submit_outpass
+
+- story: apply for bonafide
+  steps:
+    - intent: apply_bonafide
+    - action: bonafide_form
+    - active_loop: bonafide_form
+    - action: action_submit_bonafide

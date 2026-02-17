@@ -1,0 +1,4 @@
+# Note: Rasa 3.6.x requires Python 3.8-3.10
+# For Python 3.11+, we'll install without version constraint to get the latest compatible version
+rasa
+rasa-sdk

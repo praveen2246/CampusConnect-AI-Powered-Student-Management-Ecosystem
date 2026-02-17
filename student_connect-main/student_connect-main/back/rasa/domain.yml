@@ -1,0 +1,188 @@
+intents:
+  - ask_admission_date
+  - ask_college_timings
+  - greet
+  - goodbye
+  - request_certificate
+  - request_admission_certificate
+  - request_college_id
+  - request_hostel_id
+  - request_hostel_rules
+  - ask_syllabus
+  - ask_departments
+  - ask_circulars
+  - ask_staff_details
+  - ask_fee_structure
+  - request_marksheet
+  - request_leave_form
+  - apply_outpass
+  - apply_bonafide
+  - check_outpass_status
+  - default
+  - bot_challenge
+
+slots:
+  outpass_reason:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: outpass_form
+            requested_slot: outpass_reason
+  outpass_from:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: outpass_form
+            requested_slot: outpass_from
+  outpass_to:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: outpass_form
+            requested_slot: outpass_to
+  student_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: outpass_form
+            requested_slot: student_name
+  class:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: outpass_form
+            requested_slot: class
+  bonafide_reason:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: bonafide_form
+            requested_slot: bonafide_reason
+  cert_type:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: cert_type
+  reason:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  date_from:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  date_to:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  roll_no:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  department:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  year:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  contact:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+
+forms:
+  outpass_form:
+    required_slots:
+      - student_name
+      - class
+      - department
+      - outpass_from
+      - outpass_to
+      - outpass_reason
+  bonafide_form:
+    required_slots:
+      - bonafide_reason
+
+responses:
+  utter_iamabot:
+    - text: "I am a college assistant chatbot powered by AI."
+  utter_admission_date:
+    - text: "The last date for admissions is 30th August."
+  utter_college_timings:
+    - text: "College starts at 9 AM and ends at 4 PM."
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
+  utter_goodbye:
+    - text: "Goodbye! Have a great day."
+  utter_request_certificate:
+    - text: "Sure, which certificate do you need? (e.g. Outpass, Bonafide, Leave)"
+  utter_request_admission_certificate:
+    - text: "Admission certificates can be requested from the admissions office."
+  utter_request_college_id:
+    - text: "To get your college ID, please visit the admin office with your admission receipt."
+  utter_request_hostel_id:
+    - text: "Hostel IDs are issued by the hostel warden. Please contact the hostel office."
+  utter_request_hostel_rules:
+    - text: "Hostel rules are available on the college website or at the hostel office."
+  utter_ask_syllabus:
+    - text: "You can find the syllabus for your course on the college website or by contacting your department."
+  utter_ask_departments:
+    - text: "The college offers departments such as Computer Science, Mathematics, Physics, Chemistry, and more."
+  utter_ask_circulars:
+    - text: "Latest circulars are posted on the notice board and the college website."
+  utter_ask_staff_details:
+    - text: "Staff details are available on the college website or at the respective department office."
+  utter_ask_fee_structure:
+    - text: "Fee structure details are available on the college website or at the accounts office."
+  utter_request_marksheet:
+    - text: "You can collect your marksheet from the examination cell."
+  utter_request_leave_form:
+    - text: "Leave forms are available at the admin office or can be downloaded from the college website."
+  utter_ask_outpass_reason:
+    - text: "What is the reason for your outpass request?"
+  utter_ask_outpass_from:
+    - text: "When do you want to leave? (e.g., 2024-01-01)"
+  utter_ask_outpass_to:
+    - text: "When will you return? (e.g., 2024-01-02)"
+  utter_ask_student_name:
+    - text: "Please enter your full name."
+  utter_ask_class:
+    - text: "Which class/year are you in? (e.g., III Year CSE)"
+  utter_ask_department:
+    - text: "Which department do you belong to?"
+  utter_outpass_submitted:
+    - text: "Your request has been submitted successfully for approval."
+  utter_ask_bonafide_reason:
+    - text: "What is the reason for requesting a Bonafide certificate? (e.g., Passport, Bank Account, Internship)"
+  utter_bonafide_submitted:
+    - text: "✅ Your Bonafide certificate request has been submitted successfully for approval!"
+  utter_default:
+    - text: "Sorry, I didn't understand that. Can you rephrase?"
+
+actions:
+  - action_submit_outpass
+  - action_submit_bonafide
+  - action_start_certificate_request
+  - action_check_outpass_status
