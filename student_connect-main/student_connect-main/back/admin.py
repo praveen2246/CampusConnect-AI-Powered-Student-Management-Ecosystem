@@ -112,17 +112,24 @@ def update_outpass(id):
         profile_data = db["profile"].find_one({"user_id": student_id}) or {}
         
         # Merge all available data for replacement
+        extra_vars = outpass.get("extra_variables", {})
         replace_map = {
             "student_name": outpass.get("student_name") or profile_data.get("Name") or "Student",
             "date_from": outpass.get("date_from") or "N/A",
             "date_to": outpass.get("date_to") or "N/A",
             "reason": outpass.get("reason") or "N/A",
-            "roll_no": profile_data.get("Roll No.") or "N/A",
-            "department": outpass.get("extra_variables", {}).get("department") or profile_data.get("Department") or "N/A",
-            "class": outpass.get("extra_variables", {}).get("class") or profile_data.get("Class") or "N/A",
+            "roll_no": extra_vars.get("roll_no") or profile_data.get("Roll No.") or "N/A",
+            "department": extra_vars.get("department") or profile_data.get("Department") or "N/A",
+            "class": extra_vars.get("class") or extra_vars.get("class_year") or profile_data.get("Class") or "N/A",
+            "semester": extra_vars.get("semester") or "N/A",
+            "academic_year": extra_vars.get("academic_year") or "2023-2024",
+            "exam_name": extra_vars.get("exam_name") or "Semester Examination",
+            "subjects_table_rows": extra_vars.get("subjects_table_rows") or "<tr><td colspan='2'>No results provided</td></tr>",
+            "cgpa": extra_vars.get("cgpa") or "0.00",
             "gender": profile_data.get("Gender") or "N/A",
             "contact": profile_data.get("Father Mobile No.") or "N/A",
-            "created_at": outpass.get("created_at").strftime("%Y-%m-%d %H:%M:%S") if outpass.get("created_at") else "N/A"
+            "created_at": outpass.get("created_at").strftime("%Y-%m-%d %H:%M:%S") if outpass.get("created_at") else "N/A",
+            "date_now": datetime.datetime.now().strftime("%d/%m/%Y")
         }
 
         doc_content = tmpl_content

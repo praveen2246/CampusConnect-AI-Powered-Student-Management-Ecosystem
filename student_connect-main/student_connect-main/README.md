@@ -2,91 +2,118 @@
 
 CampusConnect is a professional-grade student management system featuring an AI Assistant for automated outpass/certificate issuance, a premium Admin Dashboard, and a modern Flutter mobile application.
 
-## 🚀 Project Architecture
+---
 
-The project is divided into three main components:
-1.  **Backend (`/back`)**: Flask API integrated with Rasa NLP for conversational intelligence.
-2.  **Admin Dashboard (`/admin_dashboard`)**: React (Vite) application for institutional oversight.
-3.  **Student App (`/student_connect_fixed`)**: Cross-platform Flutter app for student interactions.
+## 📂 Project Structure
+
+```bash
+student_connect-main/
+├── back/                   # Python Flask Backend
+│   ├── rasa/               # Rasa NLU & Custom Actions
+│   ├── routes/             # API Endpoints
+│   ├── admin.py            # Admin Dashboard Logic
+│   ├── app.py              # Main Application Entry
+│   ├── db.py               # MongoDB Configuration
+│   ├── seed_template.py    # Official Document HTML Templates
+│   └── venv/               # Flask Virtual Environment
+├── admin_dashboard/        # React + Vite Frontend
+│   └── src/
+│       ├── pages/          # Admin UI Modules
+│       └── services/       # API Integration
+├── student_connect_fixed/   # Flutter Mobile Application
+│   └── lib/                # Dart Frontend Logic
+├── v/                      # Rasa Virtual Environment
+└── run_project.ps1         # Unified Startup Script
+```
 
 ---
 
 ## 🛠 Prerequisites
 
-Before starting, ensure you have the following installed:
-*   **Flutter SDK**: (v3.19+ recommended)
-*   **Node.js & npm**: (v18+ recommended)
-*   **Python**: 3.10.x (Specific version required for Rasa)
-*   **MongoDB**: Local or Atlas instance.
+Ensure you have the following installed:
+*   **Flutter SDK**: v3.19+
+*   **Node.js & npm**: v18+
+*   **Python**: 3.10.x (Critical for Rasa compatibility)
+*   **MongoDB**: Local instance running on port `27017`
 
 ---
 
 ## 💻 Setup Instructions
 
 ### 1. Backend & AI Assistant (`/back`)
-The backend uses two separate virtual environments to ensure compatibility between Flask and Rasa.
+The project utilizes environment isolation between the core API and the NLP engine.
 
 ```bash
+# Setup Flask Environment
 cd back
-
-# Setup Flask Virtual Environment
 python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 
-# Setup Rasa Virtual Environment
-python -m venv venv_rasa
-.\venv_rasa\Scripts\activate
-pip install rasa rasa-sdk requests xhtml2pdf
+# Setup Rasa Environment (in root)
+cd ..
+python -m venv v
+.\v\Scripts\activate
+pip install rasa rasa-sdk requests xhtml2pdf pymongo python-dotenv
 ```
-
-**Running the Backend:**
-Open 3 separate terminals in the `back` directory:
-*   **Term 1 (Flask)**: `.\venv\Scripts\activate; python app.py`
-*   **Term 2 (Rasa Actions)**: `.\venv_rasa\Scripts\activate; cd rasa; rasa run actions`
-*   **Term 3 (Rasa Server)**: `.\venv_rasa\Scripts\activate; cd rasa; rasa run --enable-api --cors "*"`
 
 ### 2. Admin Dashboard (`/admin_dashboard`)
 ```bash
 cd admin_dashboard
 npm install
-npm run dev
 ```
-The dashboard will be available at `http://localhost:5173`.
 
 ### 3. Student Mobile App (`/student_connect_fixed`)
 ```bash
 cd student_connect_fixed
 flutter pub get
-flutter run
 ```
+
+---
+
+## 🚀 Running the Project
+
+### Automatic Option (Recommended)
+Run the following from the root directory to start all services:
+```powershell
+./run_project.ps1
+```
+
+### Manual Option
+Open 4 separate terminals:
+1.  **Flask API**: `cd back; .\venv\Scripts\activate; python app.py`
+2.  **Rasa Actions**: `cd back\rasa; ..\..\v\Scripts\activate; rasa run actions`
+3.  **Rasa Server**: `cd back\rasa; ..\..\v\Scripts\activate; rasa run --enable-api --cors "*"`
+4.  **Admin Dashboard**: `cd admin_dashboard; npm run dev`
 
 ---
 
 ## ✨ Key Features
 
-### 🤖 AI-Powered Outpass System
-*   **Conversational Logic**: Students can apply for outpasses by talking to the AI.
-*   **Status Tracking**: Ask the AI *"What is my status?"* for a real-time tracking list.
-*   **Smart Issuance**: If approved, the AI sends a professional PDF Document Card.
+### 🤖 AI-Powered Document Flow
+*   **Outpass Generation**: conversational logic for leave requests.
+*   **Bonafide Certificates**: automated verification and issuance.
+*   **Grade Certificates / Marksheets**: Integrated flow to capture student details and generate GPA summaries.
 
-### 📄 Professional Document Generation
-*   **Master Templates**: Administrators design outpass/certificate templates in the dashboard.
-*   **Automatic Attachment**: The system dynamically injects student details (Roll No, Dept, Reason) into the template upon approval.
-*   **Native PDF**: Uses `xhtml2pdf` to generate official binary PDF files viewable on any device.
+### 📄 Professional PDF Generation
+*   **Dynamic Templating**: Uses `xhtml2pdf` to convert HTML/CSS into premium binary PDFs.
+*   **Institutional Identity**: Automated injection of college names, signatures, and stamps.
+*   **One-Page Layout**: Optimized CSS ensures all certificates fit perfectly on a single A4 page.
 
 ### 📱 Premium Student UX
-*   **Persistent Sessions**: Sign in once; stay logged in across sessions using `shared_preferences`.
-*   **Global Status Center**: Dedicated section to track all active and past applications with color-coded status indicators.
-*   **Academic Tracker**: View course progress and curriculum snapshots.
+*   **Persistent Sessions**: secure authentication using JWT.
+*   **Real-time Tracking**: Dedicated status center to monitor pending, approved, and rejected applications.
+*   **Digital Downloads**: In-app PDF viewer for instant document access.
 
 ---
 
 ## 📝 Important Configuration
-*   **Backend URL**: Ensure the `baseUrl` in `student_connect_fixed/lib/config.dart` matches your local machine's IP (use `10.0.2.2` for Android Emulator).
-*   **NDK Version**: This project requires Android **NDK 27.0.12077973**. I have pre-configured this in `build.gradle.kts`.
+
+*   **Fixed IPs**: If running on mobile, update `baseUrl` in `lib/config.dart` to your machine's local IP (e.g., `192.168.x.x`).
+*   **Database**: Ensure `MONGO_DB_NAME` in `.env` matches your intended database name (default: `college_chatbot`).
+*   **PDF Fixes**: If certificates crash on download, ensure the template height properties are removed from `seed_template.py`.
 
 ---
 
 ## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License.

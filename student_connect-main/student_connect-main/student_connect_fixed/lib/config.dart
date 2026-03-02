@@ -4,8 +4,12 @@ class AppConfig {
   // For Web (Chrome/Edge) or Windows Desktop
   static const String baseUrl = 'http://localhost:8000';
 
+  // For Android Device (real phone on same WiFi network)
+  // static const String baseUrl = 'http://10.139.168.186:8000';
+
   // For Android Emulator (alternative)
   // static const String baseUrl = 'http://10.0.2.2:8000';
+
   
   // API Endpoints
   static const String loginUrl = '$baseUrl/login';

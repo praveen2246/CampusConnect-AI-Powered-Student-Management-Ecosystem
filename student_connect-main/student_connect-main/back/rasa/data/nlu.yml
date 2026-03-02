@@ -1,3 +1,5 @@
+version: "3.1"
+
 nlu:
 - intent: ask_admission_date
   examples: |
@@ -44,17 +46,11 @@ nlu:
 
 - intent: request_certificate
   examples: |
-    - I need a [bonafide](cert_type) certificate
-    - Can you give me a [leave](cert_type) certificate?
-    - How do I get a [outpass](cert_type) certificate?
-    - Please issue my [hostel](cert_type) certificate
-    - I want to apply for a [bonafide](cert_type) certificate
-    - [Bonafide](cert_type) certificate request
     - I need a certificate
     - Can I get a certificate?
     - I want to apply for a document
-    - [Leave](cert_type) form request
-    - [Outpass](cert_type) request
+    - What certificates can I get?
+    - List of available certificates
 
 - intent: request_admission_certificate
   examples: |
@@ -128,8 +124,16 @@ nlu:
     - What are the hostel fees?
     - Fee structure for first year
 
-- intent: request_marksheet
+- intent: apply_grade_certificate
   examples: |
+    - I want to apply for a grade certificate
+    - request grade certificate
+    - how can I get my grade certificate
+    - need my grades and CGPA
+    - generate grade certificate
+    - provide me with grade certificate
+    - Grade certificate request
+    - apply for grade certificate
     - I need my marksheet
     - How do I get my marksheet?
     - Please provide my marksheet
@@ -183,4 +187,33 @@ nlu:
     - Is my leave request approved?
     - check status
     - status of my outpass
+
+- intent: affirm
+  examples: |
+    - yes
+    - yup
+    - sure
+    - definitely
+    - correct
+    - that is right
+    - Yes
+
+- intent: deny
+  examples: |
+    - no
+    - n
+    - never
+    - I don't think so
+    - don't do that
+    - no way
+    - not really
+
+- intent: edit
+  examples: |
+    - edit
+    - Edit
+    - change details
+    - update my info
+    - I want to change something
+    - edit my response
 

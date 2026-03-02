@@ -180,7 +180,7 @@ class _ChatbotScreenState extends State<ChatbotScreen> {
   }
 
   Widget _buildChatBubble(ChatMessage message) {
-    final bool hasLink = message.text.contains("http://10.0.2.2");
+    final bool hasLink = message.text.contains("/outpass/download/");
     String cleanText = message.text;
     String? link;
 

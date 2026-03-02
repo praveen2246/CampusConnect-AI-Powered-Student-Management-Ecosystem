@@ -72,10 +72,6 @@ rules:
     - intent: ask_fee_structure
     - action: utter_ask_fee_structure
 
-- rule: Request marksheet
-  steps:
-    - intent: request_marksheet
-    - action: utter_request_marksheet
 
 - rule: Request leave form
   steps:
@@ -118,10 +114,56 @@ rules:
     - active_loop: null
     - slot_was_set:
         - requested_slot: null
+    - action: utter_confirm_bonafide_details
+    - action: utter_ask_bonafide_confirm
+
+- rule: Confirm and submit bonafide
+  steps:
+    - action: utter_ask_bonafide_confirm
+    - intent: affirm
     - action: action_submit_bonafide
-    - action: utter_bonafide_submitted
+
+- rule: Edit bonafide details
+  steps:
+    - action: utter_ask_bonafide_confirm
+    - intent: edit
+    - action: action_reset_bonafide_slots
+    - action: bonafide_form
+    - active_loop: bonafide_form
 
 - rule: Check outpass status
   steps:
     - intent: check_outpass_status
     - action: action_check_outpass_status
+
+- rule: Activate grade certificate form
+  steps:
+    - intent: apply_grade_certificate
+    - action: grade_certificate_form
+    - active_loop: grade_certificate_form
+
+- rule: Submit grade certificate form
+  condition:
+    - active_loop: grade_certificate_form
+  steps:
+    - action: grade_certificate_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_calculate_cgpa
+    - action: utter_confirm_grade_details
+    - action: utter_ask_grade_confirm
+
+- rule: Confirm and submit grade certificate
+  steps:
+    - action: utter_ask_grade_confirm
+    - intent: affirm
+    - action: action_submit_grade_certificate
+
+- rule: Edit grade certificate details
+  steps:
+    - action: utter_ask_grade_confirm
+    - intent: edit
+    - action: action_reset_grade_slots
+    - action: grade_certificate_form
+    - active_loop: grade_certificate_form

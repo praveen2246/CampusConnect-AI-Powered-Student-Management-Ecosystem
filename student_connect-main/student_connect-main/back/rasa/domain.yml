@@ -1,3 +1,5 @@
+version: "3.1"
+
 intents:
   - ask_admission_date
   - ask_college_timings
@@ -13,13 +15,16 @@ intents:
   - ask_circulars
   - ask_staff_details
   - ask_fee_structure
-  - request_marksheet
   - request_leave_form
   - apply_outpass
   - apply_bonafide
   - check_outpass_status
   - default
   - bot_challenge
+  - affirm
+  - deny
+  - edit
+  - apply_grade_certificate
 
 slots:
   outpass_reason:
@@ -70,6 +75,38 @@ slots:
         conditions:
           - active_loop: bonafide_form
             requested_slot: bonafide_reason
+  bonafide_full_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: bonafide_form
+            requested_slot: bonafide_full_name
+  bonafide_register_number:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: bonafide_form
+            requested_slot: bonafide_register_number
+  bonafide_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: bonafide_form
+            requested_slot: bonafide_date
+  bonafide_academic_year:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: bonafide_form
+            requested_slot: bonafide_academic_year
   cert_type:
     type: text
     influence_conversation: true
@@ -111,6 +148,99 @@ slots:
     influence_conversation: true
     mappings:
       - type: from_text
+  grade_first_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_first_name
+  grade_register_number:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_register_number
+  grade_class:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_class
+  grade_semester:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  grade_academic_year:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_academic_year
+  grade_exam_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  grade_subjects_grades:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  grade_date:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_date
+  grade_num_subjects:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_num_subjects
+  grade_current_index:
+    type: float
+    influence_conversation: false
+    mappings: []
+  grade_subjects_grades_list:
+    type: list
+    influence_conversation: false
+    mappings: []
+  grade_current_subject_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+  grade_current_subject_grade:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        conditions:
+          - active_loop: grade_certificate_form
+            requested_slot: grade_current_subject_grade
+  grade_gpa:
+    type: text
+    influence_conversation: true
+    mappings: []
+  grade_class_year:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
 
 forms:
   outpass_form:
@@ -123,7 +253,20 @@ forms:
       - outpass_reason
   bonafide_form:
     required_slots:
+      - bonafide_full_name
+      - bonafide_register_number
+      - bonafide_date
+      - bonafide_academic_year
       - bonafide_reason
+  grade_certificate_form:
+    required_slots:
+      - grade_first_name
+      - grade_register_number
+      - grade_class
+      - grade_academic_year
+      - grade_num_subjects
+      - grade_current_subject_grade
+      - grade_date
 
 responses:
   utter_iamabot:
@@ -156,8 +299,6 @@ responses:
     - text: "Staff details are available on the college website or at the respective department office."
   utter_ask_fee_structure:
     - text: "Fee structure details are available on the college website or at the accounts office."
-  utter_request_marksheet:
-    - text: "You can collect your marksheet from the examination cell."
   utter_request_leave_form:
     - text: "Leave forms are available at the admin office or can be downloaded from the college website."
   utter_ask_outpass_reason:
@@ -175,14 +316,65 @@ responses:
   utter_outpass_submitted:
     - text: "Your request has been submitted successfully for approval."
   utter_ask_bonafide_reason:
-    - text: "What is the reason for requesting a Bonafide certificate? (e.g., Passport, Bank Account, Internship)"
+    - text: "Please mention the Reason for requesting the Bonafide Certificate."
+  utter_ask_bonafide_full_name:
+    - text: "Hello! I will help you generate your Bonafide Certificate. Please provide the following details.\n\nPlease enter your Full Name (as per college records)."
+  utter_ask_bonafide_register_number:
+    - text: "Enter your Register Number."
+  utter_ask_bonafide_date:
+    - text: "Enter the Date for the certificate (DD/MM/YYYY)."
+  utter_ask_bonafide_academic_year:
+    - text: "Enter your Academic Year (Example: 2023–2024)."
+  utter_confirm_bonafide_details:
+    - text: |
+        Here are the details you provided:
+        Full Name: {bonafide_full_name}
+        Register Number: {bonafide_register_number}
+        Date: {bonafide_date}
+        Academic Year: {bonafide_academic_year}
+        Reason: {bonafide_reason}
+  utter_ask_bonafide_confirm:
+    - text: "Do you want to generate the Bonafide Certificate now? (Yes / Edit)"
   utter_bonafide_submitted:
     - text: "✅ Your Bonafide certificate request has been submitted successfully for approval!"
   utter_default:
     - text: "Sorry, I didn't understand that. Can you rephrase?"
+  utter_ask_grade_first_name:
+    - text: "Hello! I will help you generate your Student Grade Certificate. Please provide the following details.\n\nEnter your First Name."
+  utter_ask_grade_register_number:
+    - text: "Enter your Register Number."
+  utter_ask_grade_class:
+    - text: "Enter your Class (Example: B.Sc Computer Science / III CSE)."
+  utter_ask_grade_academic_year:
+    - text: "Enter the Academic Year (Example: 2023–2024)."
+  utter_ask_grade_num_subjects:
+    - text: "Enter the Number of Subjects."
+  utter_ask_grade_current_subject_grade:
+    - text: "Enter Grade for Subject {grade_current_index} (O, A+, A, B+, B):"
+  utter_ask_grade_date:
+    - text: "Enter the Date of Issue for the certificate."
+  utter_confirm_grade_details:
+    - text: |
+        Student Grade Certificate Details:
+        First Name: {grade_first_name}
+        Register Number: {grade_register_number}
+        Class: {grade_class}
+        Academic Year: {grade_academic_year}
+        Number of Subjects: {grade_num_subjects}
+        Grades: {grade_subjects_grades}
+        GPA: {grade_gpa}
+  utter_ask_grade_confirm:
+    - text: "Do you want to generate and download the Grade Certificate now? (Yes / Edit)"
+  utter_grade_certificate_submitted:
+    - text: "✅ Your Grade Certificate has been submitted successfully for approval!"
 
 actions:
   - action_submit_outpass
   - action_submit_bonafide
   - action_start_certificate_request
   - action_check_outpass_status
+  - action_reset_bonafide_slots
+  - action_submit_grade_certificate
+  - action_reset_grade_slots
+  - action_calculate_cgpa
+  - validate_grade_certificate_form

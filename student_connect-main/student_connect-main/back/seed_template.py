@@ -10,80 +10,437 @@ db = client[os.getenv("MONGO_DB_NAME", "college_chatbot")]
 templates_collection = db["templates"]
 
 professional_html = """
-<div style="font-family: 'Helvetica', 'Arial', sans-serif; max-width: 800px; margin: 0 auto; padding: 40px; border: 15px solid #1e3a8a; background-color: #ffffff; color: #1e293b; position: relative;">
-    <!-- Background Watermark (Optional, simplified for xhtml2pdf) -->
-    <div style="text-align: center; margin-bottom: 30px;">
-        <h1 style="margin: 0; color: #1e3a8a; font-size: 32px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;">Kamaraj College</h1>
-        <p style="margin: 5px 0; font-size: 14px; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 2px;">of Engineering and Technology</p>
-        <p style="margin: 2px 0; font-size: 11px; color: #94a3b8;">(An Autonomous Institution | Approved by AICTE, New Delhi)</p>
-        <div style="margin-top: 15px; border-bottom: 3px double #1e3a8a; width: 80%; margin-left: auto; margin-right: auto;"></div>
-    </div>
-
-    <div style="text-align: center; margin-bottom: 40px;">
-        <h2 style="margin: 0; font-size: 24px; color: #1e3a8a; background-color: #f1f5f9; display: inline-block; padding: 10px 30px; border-radius: 4px; border: 1px solid #cbd5e1; text-transform: uppercase;">Student Outpass</h2>
-    </div>
-
-    <div style="line-height: 1.8; font-size: 16px; margin-bottom: 40px;">
-        <p>This is to certify that <strong>{student_name}</strong>, a bona-fide student of this institution, is permitted to leave the premises as per the details mentioned below:</p>
-    </div>
-
-    <table style="width: 100%; border-collapse: collapse; margin-bottom: 40px; border: 1px solid #e2e8f0;">
-        <tr style="background-color: #f8fafc;">
-            <th style="text-align: left; padding: 12px 15px; border: 1px solid #e2e8f0; color: #475569; width: 35%;">Purpose of Visit</th>
-            <td style="padding: 12px 15px; border: 1px solid #e2e8f0; font-weight: 600;">{reason}</td>
-        </tr>
+<html>
+<head>
+    <style>
+        @page {
+            size: a4 portrait;
+            margin: 1.5cm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            color: #1e293b;
+        }
+        .header-table {
+            width: 100%;
+            border-bottom: 3px solid #000000;
+            margin-bottom: 30px;
+        }
+        .college-name {
+            color: #000000;
+            font-size: 22px;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .title {
+            text-align: center;
+            font-size: 20px;
+            text-decoration: underline;
+            margin-bottom: 40px;
+            color: #000000;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 60px;
+        }
+        .info-table td {
+            padding: 10px;
+            font-size: 16px;
+        }
+        .label {
+            font-weight: bold;
+            width: 35%;
+        }
+        .value {
+            border-bottom: 1px solid #94a3b8;
+        }
+        .signature-table {
+            width: 100%;
+            margin-top: 100px;
+        }
+        .signature-box {
+            border-top: 1px solid #1e293b;
+            padding-top: 10px;
+            text-align: center;
+            width: 250px;
+        }
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #64748b;
+            margin-top: 50px;
+            border-top: 1px dashed #cbd5e1;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <table class="header-table">
         <tr>
-            <th style="text-align: left; padding: 12px 15px; border: 1px solid #e2e8f0; color: #475569;">Departure Date & Time</th>
-            <td style="padding: 12px 15px; border: 1px solid #e2e8f0; font-weight: 600;">{date_from}</td>
-        </tr>
-        <tr style="background-color: #f8fafc;">
-            <th style="text-align: left; padding: 12px 15px; border: 1px solid #e2e8f0; color: #475569;">Expected Return</th>
-            <td style="padding: 12px 15px; border: 1px solid #e2e8f0; font-weight: 600;">{date_to}</td>
+            <td class="college-name">Kamaraj College of Engineering and Technology</td>
         </tr>
     </table>
 
-    <div style="margin-top: 60px; height: 120px;">
-        <table style="width: 100%;">
-            <tr>
-                <td style="width: 50%; text-align: center;">
-                    <div style="margin-bottom: 10px; font-weight: bold; height: 40px;"></div>
-                    <div style="border-top: 1px solid #94a3b8; width: 180px; margin: 0 auto; padding-top: 5px;">
-                        <p style="margin: 0; font-size: 14px; font-weight: 700;">Student Signature</p>
-                    </div>
-                </td>
-                <td style="width: 50%; text-align: center;">
-                    <div style="margin-bottom: 5px; color: #1e3a8a; font-weight: 800; font-size: 14px; height: 40px; vertical-align: bottom;">DIGITALLY VERIFIED</div>
-                    <div style="border-top: 2px solid #1e3a8a; width: 220px; margin: 0 auto; padding-top: 5px;">
-                        <p style="margin: 0; font-size: 14px; font-weight: 700;">Warden / HOD / Principal</p>
-                        <p style="margin: 0; font-size: 10px; color: #64748b;">(Generated via Student Connect Portal)</p>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <div class="title">STUDENT OUTPASS</div>
 
-    <div style="margin-top: 50px; padding: 15px; background-color: #fff7ed; border: 1px solid #fed7aa; border-radius: 4px; font-size: 11px; color: #9a3412;">
-        <strong>Important Instructions:</strong>
-        <ul style="margin: 5px 0 0 20px; padding: 0;">
-            <li>This document must be presented at the Security Desk upon departure and arrival.</li>
-            <li>Any deviation from the mentioned schedule or purpose will attract disciplinary action.</li>
-            <li>In case of emergency, contact the institutional helpline immediately.</li>
-        </ul>
+    <table class="info-table">
+        <tr>
+            <td class="label">Student Name</td>
+            <td>:</td>
+            <td class="value">{student_name}</td>
+        </tr>
+        <tr>
+            <td class="label">Class / Year</td>
+            <td>:</td>
+            <td class="value">{class}</td>
+        </tr>
+        <tr>
+            <td class="label">Out Date & Time</td>
+            <td>:</td>
+            <td class="value">{date_from}</td>
+        </tr>
+        <tr>
+            <td class="label">In Date & Time</td>
+            <td>:</td>
+            <td class="value">{date_to}</td>
+        </tr>
+        <tr>
+            <td class="label">Reason</td>
+            <td>:</td>
+            <td class="value">{reason}</td>
+        </tr>
+    </table>
+
+    <table class="signature-table">
+        <tr>
+            <td style="width: 60%;"></td>
+            <td>
+                <div class="signature-box">
+                    <strong>Warden Signature</strong>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        Computer Generated Outpass | Campus Connect Portal
     </div>
-    
-    <div style="margin-top: 20px; text-align: center; font-size: 10px; color: #94a3b8;">
-        Document ID: <span style="font-family: monospace;">CERT-{student_name[:3].upper()}-{date_from.replace('-', '')}</span> | College Copy
-    </div>
-</div>
+</body>
+</html>
 """
 
+bonafide_html = """
+<html>
+<head>
+    <style>
+        @page {
+            size: a4 portrait;
+            margin: 1cm;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+        }
+        .container {
+            padding: 20px;
+        }
+        .college-header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            margin-bottom: 25px;
+            padding-bottom: 12px;
+        }
+        .college-name {
+            font-size: 24pt;
+            font-weight: bold;
+            color: #000;
+        }
+        .college-info {
+            font-size: 11pt;
+            color: #333;
+        }
+        .cert-title {
+            text-align: center;
+            font-size: 20pt;
+            font-weight: bold;
+            text-decoration: underline;
+            margin: 40px 0;
+        }
+        .date-line {
+            font-size: 12pt;
+            margin-bottom: 25px;
+        }
+        .main-text {
+            font-size: 14pt;
+            text-align: justify;
+            margin-bottom: 60px;
+            line-height: 1.8;
+        }
+        .sig-table {
+            width: 100%;
+            margin-top: 60px;
+        }
+        .sig-box {
+            text-align: center;
+            font-size: 11pt;
+            font-weight: bold;
+        }
+        .sig-line {
+            border-top: 1px solid #000;
+            margin: 0 15px;
+            padding-top: 8px;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 9pt;
+            color: #555;
+            margin-top: 80px;
+            border-top: 1px dashed #999;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="college-header">
+        <div class="college-name">Kamaraj College of Engineering and Technology</div>
+        <div class="college-info">
+            (An Autonomous Institution | Approved by AICTE, New Delhi)<br/>
+            S.P.G.Chidambara Nadar - C.Nagammal Campus, Madurai - 625 701.<br/>
+            Phone: 04549 278171 | Email: mail@kamarajengg.edu.in
+        </div>
+    </div>
+
+    <div class="cert-title">BONAFIDE CERTIFICATE</div>
+
+    <table style="width: 100%; margin-bottom: 25px;">
+        <tr>
+            <td style="font-size: 13pt;"><strong>Date:</strong> {date_now}</td>
+        </tr>
+    </table>
+
+    <div class="main-text">
+        This is to certify that <strong>{student_name}</strong>, bearing Register Number <strong>{roll_no}</strong>, 
+        is a bonafide student of <strong>{department}</strong> at <strong>Kamaraj College of Engineering and Technology</strong> 
+        for the academic year <strong>{academic_year}</strong>. This certificate is issued upon the request of the student 
+        for <strong>{reason}</strong>.
+    </div>
+
+    <div style="text-align: center; margin-bottom: 60px;">
+        <div style="width: 130px; height: 130px; border: 1px dashed #666; display: inline-block; padding-top: 55px; font-size: 9pt; color: #666;">
+            OFFICIAL STAMP
+        </div>
+    </div>
+
+    <table class="sig-table">
+        <tr>
+            <td style="width: 33.3%;">
+                <div class="sig-box">
+                    <div class="sig-line">Class Advisor</div>
+                </div>
+            </td>
+            <td style="width: 33.3%;">
+                <div class="sig-box">
+                    <div class="sig-line">Head of Department</div>
+                </div>
+            </td>
+            <td style="width: 33.3%;">
+                <div class="sig-box">
+                    <div class="sig-line">Principal</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="footer-note">
+        This is a computer-generated document. Verification can be done via the Campus Connect Portal.
+    </div>
+</div>
+</body>
+</html>
+"""
+
+grade_certificate_html = """
+<html>
+<head>
+    <style>
+        @page {
+            size: a4 portrait;
+            margin: 0.8cm;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: #1e293b;
+            line-height: 1.2;
+            font-size: 11pt;
+        }
+        .container {
+            border: 1.5px solid #1e3a8a;
+            padding: 15px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1.5px solid #1e3a8a;
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+        }
+        .college-name {
+            font-size: 20pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            text-transform: uppercase;
+        }
+        .title {
+            text-align: center;
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 10px 0;
+            text-decoration: underline;
+        }
+        .info-table {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+        .info-table td {
+            padding: 3px;
+            font-size: 11pt;
+        }
+        .label {
+            font-weight: bold;
+            width: 30%;
+        }
+        .grade-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .grade-table th, .grade-table td {
+            border: 1px solid #1e3a8a;
+            padding: 6px;
+            text-align: center;
+            font-size: 10pt;
+        }
+        .grade-table th {
+            background-color: #f1f5f9;
+        }
+        .gpa-container {
+            text-align: right;
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #1e3a8a;
+        }
+        .footer {
+            margin-top: 40px;
+            width: 100%;
+        }
+        .sig-box {
+            text-align: center;
+            width: 180px;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="college-name">Kamaraj College of Engineering and Technology</div>
+        <div style="font-size: 10pt;">(An Autonomous Institution)</div>
+        <div style="font-size: 10pt;">S.P.G.C. Nagar, K. Vellakulam - 625 701</div>
+    </div>
+
+    <div class="title">STUDENT GRADE CERTIFICATE</div>
+
+    <table class="info-table">
+        <tr>
+            <td class="label">First Name</td>
+            <td>: {student_name}</td>
+        </tr>
+        <tr>
+            <td class="label">Register Number</td>
+            <td>: {roll_no}</td>
+        </tr>
+        <tr>
+            <td class="label">Class</td>
+            <td>: {class}</td>
+        </tr>
+        <tr>
+            <td class="label">Academic Year</td>
+            <td>: {academic_year}</td>
+        </tr>
+    </table>
+
+    <table class="grade-table">
+        <thead>
+            <tr>
+                <th>Subject Name</th>
+                <th>Grade Obtained</th>
+            </tr>
+        </thead>
+        <tbody>
+            {subjects_table_rows}
+        </tbody>
+    </table>
+
+    <div class="gpa-container">
+        GPA: {cgpa}
+    </div>
+
+    <table class="footer">
+        <tr>
+            <td>
+                <div class="sig-box">
+                    <p>____________________</p>
+                    <p><b>Prepared By</b></p>
+                </div>
+            </td>
+            <td style="text-align: right;">
+                <div class="sig-box" style="float: right;">
+                    <p>____________________</p>
+                    <p><b>Controller of Examinations</b></p>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+    <div style="margin-top: 30px; text-align: center; font-size: 9pt; color: #64748b;">
+        Date of Issue: {date_now}
+    </div>
+</div>
+</body>
+</html>
+"""
+
+# Seed Outpass Template
 templates_collection.update_one(
     {"type": "outpass"},
     {"$set": {
         "content": professional_html,
-        "variables": ["student_name", "reason", "date_from", "date_to"]
+        "variables": ["student_name", "class", "date_from", "date_to", "reason"]
     }},
     upsert=True
 )
 
-print("Professional Outpass Template Seeded Successfully!")
+# Seed Bonafide Template
+templates_collection.update_one(
+    {"type": "bonafide"},
+    {"$set": {
+        "content": bonafide_html,
+        "variables": ["student_name", "roll_no", "department", "academic_year", "reason", "date_now"]
+    }},
+    upsert=True
+)
+
+# Seed Grade Certificate Template
+templates_collection.update_one(
+    {"type": "grade_certificate"},
+    {"$set": {
+        "content": grade_certificate_html,
+        "variables": ["student_name", "roll_no", "class", "academic_year", "subjects_table_rows", "cgpa", "date_now"]
+    }},
+    upsert=True
+)
+
+print("Professional Templates Seeded Successfully!")

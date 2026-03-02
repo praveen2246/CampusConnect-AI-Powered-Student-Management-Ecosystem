@@ -5,6 +5,7 @@ Thumbs.db
 *.log
 *.pdf
 *.zip
+.agent/
 
 # Node.js (Admin Dashboard)
 node_modules/
